@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>รายการคลิปเสียง KareX</title>
+  <!-- นำเข้า LIFF SDK -->
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <style>
+    * { box-sizing: border-box; font-family: sans-serif; }
+    body { background-color: #f4f6f9; margin: 0; padding: 15px; color: #333; }
+    .container { max-width: 480px; margin: 0 auto; }
+    h2 { text-align: center; color: #06C755; margin-bottom: 20px; }
+    .card { background: #fff; border-radius: 12px; padding: 15px; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); border-left: 5px solid #06C755; }
+    .card h3 { margin: 0 0 10px 0; font-size: 15px; color: #222; }
+    audio { width: 100%; margin-top: 5px; }
+    .status { font-size: 12px; color: #777; margin-top: 8px; text-align: right; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🎧 รายการคลิปเสียง KareX</h2>
+    
+    <!-- คลิปที่ 1 -->
+    <div class="card">
+      <h3>1. การเช็ดตัวลดไข้ (คลิปที่ 1)</h3>
+      <audio controls src="https://lh3.googleusercontent.com/d/1Rr0njPdevyQtUPnjDlgjdvBScgJmASE6" data-title="การเช็ดตัวลดไข้ (คลิปที่ 1)"></audio>
+      <div class="status">ฟังให้จบเพื่อรับ Achievement</div>
+    </div>
+
+    <!-- คลิปที่ 2 -->
+    <div class="card">
+      <h3>2. การเช็ดตัวลดไข้ (คลิปที่ 2)</h3>
+      <audio controls src="https://lh3.googleusercontent.com/d/1xDV4c5kKzwBbkoTuyJXz-ghgowrv6y_a" data-title="การเช็ดตัวลดไข้ (คลิปที่ 2)"></audio>
+      <div class="status">ฟังให้จบเพื่อรับ Achievement</div>
+    </div>
+
+    <!-- คลิปที่ 3 -->
+    <div class="card">
+      <h3>3. การดูแลสายสวนและถุงปัสสาวะ</h3>
+      <audio controls src="https://lh3.googleusercontent.com/d/1rvFnQfFMsOI-yaw1VzdQLWPJCd99sJRm" data-title="การดูแลสายสวนและถุงปัสสาวะ"></audio>
+      <div class="status">ฟังให้จบเพื่อรับ Achievement</div>
+    </div>
+
+    <!-- คลิปที่ 4 -->
+    <div class="card">
+      <h3>4. การประเมินและการดูแลแผลกดทับ</h3>
+      <audio controls src="https://lh3.googleusercontent.com/d/1iPAWJZsrS9KTcCxezRNRDQLz-Y_UBvPU" data-title="การประเมินและการดูแลแผลกดทับ"></audio>
+      <div class="status">ฟังให้จบเพื่อรับ Achievement</div>
+    </div>
+
+    <!-- คลิปที่ 5 -->
+    <div class="card">
+      <h3>5. การแปลผลสุขภาพเบื้องต้น</h3>
+      <audio controls src="https://lh3.googleusercontent.com/d/1tEthzw6VA4S0OnTnkH8QAHORb8VlGHgi" data-title="การแปลผลสุขภาพเบื้องต้น"></audio>
+      <div class="status">ฟังให้จบเพื่อรับ Achievement</div>
+    </div>
+
+    <!-- คลิปที่ 6 -->
+    <div class="card">
+      <h3>6. การพลิกตัวผู้ป่วยติดเตียง</h3>
+      <audio controls src="https://lh3.googleusercontent.com/d/1s7G-FSjis20ZTyChlTck0cJJkgey1jgL" data-title="การพลิกตัวผู้ป่วยติดเตียง"></audio>
+      <div class="status">ฟังให้จบเพื่อรับ Achievement</div>
+    </div>
+
+    <!-- คลิปที่ 7 -->
+    <div class="card">
+      <h3>7. สุขภาพและโภชนาการสำหรับผู้สูงอายุ</h3>
+      <audio controls src="https://lh3.googleusercontent.com/d/1uPdxEyDXmJA_w34ABZEHbdhBHUOgDPyB" data-title="สุขภาพและโภชนาการสำหรับผู้สูงอายุ"></audio>
+      <div class="status">ฟังให้จบเพื่อรับ Achievement</div>
+    </div>
+  </div>
+
+  <script>
+    const LIFF_ID = "2011200718-0YDNGgMN";
+
+    async function initLiff() {
+      try {
+        await liff.init({ liffId: LIFF_ID });
+        if (!liff.isLoggedIn()) {
+          liff.login();
+        }
+      } catch (err) {
+        console.error("LIFF Init Error:", err);
+      }
+    }
+    initLiff();
+
+    const audioElements = document.querySelectorAll('audio');
+
+    audioElements.forEach((audio) => {
+      // เมื่อเริ่มกดเล่นคลิปใดคลิปหนึ่ง ให้หยุดคลิปอื่นอัตโนมัติ
+      audio.addEventListener('play', () => {
+        audioElements.forEach((otherAudio) => {
+          if (otherAudio !== audio) {
+            otherAudio.pause();
+          }
+        });
+      });
+
+      // ตรวจจับเมื่อฟังจบ
+      audio.addEventListener('ended', async () => {
+        const title = audio.getAttribute('data-title');
+        const statusDiv = audio.nextElementSibling;
+        statusDiv.innerText = "🎉 ฟังจบแล้ว! กำลังส่ง Achievement...";
+        statusDiv.style.color = "#06C755";
+
+        try {
+          await liff.sendMessages([{
+            type: 'text',
+            text: `🏆 ยินดีด้วย! คุณฟังคลิปเรื่อง "${title}" จบแล้ว และได้รับ Achievement เรียบร้อย!`
+          }]);
+          
+          setTimeout(() => {
+            liff.closeWindow();
+          }, 1500);
+        } catch (err) {
+          alert("เกิดข้อผิดพลาดในการส่งข้อความ: " + err);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
